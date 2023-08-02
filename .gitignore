@@ -1,0 +1,20 @@
+dist/
+deploy_versions/
+.temp/
+.rn_temp/
+node_modules/
+.DS_Store
+
+#---------------------------------------#
+# Tools and Package specific ignores    #
+#---------------------------------------#
+.eslintcache
+yarn-error.log
+yarn-debug.log*
+.yarn-integrity
+.yarnrc
+yarn-1.22.5.cjs
+yarn-1.22.5.js
+.yarn/cache
+.yarn/unplugged
+.yarn/install-state.gz
