@@ -5,6 +5,7 @@ import './index.less'
 import { h } from 'preact';
 // import { useEffect } from 'preact/hooks';
 import { Button, Cell } from '@nutui/nutui-react-taro';
+import Taro from '@tarojs/taro';
 // import { useRequest } from 'ahooks'
 
 // import caseSvc from '@/services/caseSvc';
@@ -24,6 +25,11 @@ const Index = () => {
         onClick={() => count.value++}
       >
         increment
+      </Button>
+      <Button shape="square" type="primary" size="large"
+        onClick={() => Taro.navigateTo({url: '/pages/userInfo/index'})}
+      >
+        我的投诉
       </Button>
     </View>
   )

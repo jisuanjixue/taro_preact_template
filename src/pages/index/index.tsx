@@ -5,7 +5,7 @@ import './index.less'
 // import useSignalReactive from '../../hooks/useSignalReactive';
 import { h } from 'preact';
 import { Button, Cell, Swiper, Image, Skeleton } from '@nutui/nutui-react-taro';
-import host from '../../utils/httpRequest/apiConfig.ts'
+import host from '../../utils/httpRequest/apiConfig'
 
 import bannerSvc from '@/services/bannerSvc';
 import { useRequest } from 'ahooks';
