@@ -1,10 +1,11 @@
 // index.ts
 import axios from "axios";
 import type { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
-import Taro from "@tarojs/taro";
+import Taro, { getCurrentPages } from "@tarojs/taro";
 import tokenUtils from "./tokenUtils";
 import host from "./apiConfig";
 import mem from "mem";
+import authSvc from "@/services/authSvc";
 
 type Result<T> = {
     code: number;
@@ -27,8 +28,12 @@ export class Request {
             (config: AxiosRequestConfig) => {
                 // 一般会请求拦截里面加token，用于后端的验证
                 const token = tokenUtils.getToken();
+                console.log("🚀 ~ file: index.ts:31 ~ Request ~ constructor ~ token:", token)
                 if (token) {
-                    config.headers!.Authorization = token;
+                    config.headers = {
+                        ...config.headers,
+                        authorization: `Bearer ${token.accessToken}`,
+                    };
                 }
                 if (config.url) {
                     if (!config.url.startsWith("http")) {
@@ -56,6 +61,7 @@ export class Request {
                 return res.data;
             },
             async (error: any) => {
+                console.log("🚀 ~ file: index.ts:59 ~ Request ~ error:", error)
                 const refreshTokenFn = async () => {
                     const token = tokenUtils.getToken();
                     try {
@@ -88,6 +94,35 @@ export class Request {
                     }
                     return this.instance(originalRequest);
                 }
+                if (error.response.status === 401) {
+                    Taro.showActionSheet({
+                        itemList: ['个人登录', '法人登录'],
+                        success: async (res) => {
+                            const type = res.tapIndex === 0 ? "个人" : "法人";
+                            const result = await authSvc.getAccessToken(type);
+                            const pages = getCurrentPages();
+                            const currentPage = pages[pages.length - 1];
+                            const url = currentPage.route;
+                            if (result.success) {
+                                Taro.showToast({
+                                    title: "登录成功",
+                                    icon: "success",
+                                    duration: 2000
+                                });
+                                Taro.reLaunch({
+                                    url: `/${url}`
+                                });
+                            } else {
+                                Taro.navigateTo({
+                                    url: `/packageA/pages/register/register?openId=${result.data.weixinOpenId}`
+                                });
+                            }
+                        },
+                        fail: function (res) {
+                            console.log(res.errMsg)
+                        }
+                    })
+                }
                 // 这里用来处理http常见错误，进行全局提示
                 let message = "";
                 switch (error.response.status) {
@@ -96,7 +131,7 @@ export class Request {
                         break;
                     case 401:
                         message = "未授权，请重新登录(401)";
-                        
+                        // 这里可以做清空storage并跳转到登录页的操作
                         break;
                     case 403:
                         message = "拒绝访问(403)";

@@ -18,7 +18,7 @@ const Userinfo = () => {
   })
 
   useSignalEffect(() => {
-    run({status: tabValue.value, page: pageNation.value.page, row: pageNation.value.rows})
+    run({status: tabValue.value, page: pageNation.value.page, rows: pageNation.value.rows})
   })
 
   return (
