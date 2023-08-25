@@ -14,7 +14,7 @@ const getComplaintPublishDetail = (id: string) =>
 
 const geStatics = () => request.get<IResponseListData<ComplaintData.IStatics>>(`${routePrefix}/statics`);
 const myComplaint = (params) =>
-  request.get<IResponseListData<ComplaintData.IComplaint>>(`${routePrefix}/my?status=${params.status}&page=${params.page}&rows=${params.rows}`);
+  request.get<ComplaintData.IComplaint>(`${routePrefix}/my?status=${params.status}&page=${params.page}&rows=${params.rows}`);
 
 const getDetail = (id: string) => request.get<IResponseData<ComplaintData.IComplaintDetail>>(`${routePrefix}/${id}`);
 const postReview = (data: ComplaintData.IReview) => request.post(`${routePrefix}/review`, data);

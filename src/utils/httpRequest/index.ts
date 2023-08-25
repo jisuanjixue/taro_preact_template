@@ -28,7 +28,6 @@ export class Request {
             (config: AxiosRequestConfig) => {
                 // 一般会请求拦截里面加token，用于后端的验证
                 const token = tokenUtils.getToken();
-                console.log("🚀 ~ file: index.ts:31 ~ Request ~ constructor ~ token:", token)
                 if (token) {
                     config.headers = {
                         ...config.headers,

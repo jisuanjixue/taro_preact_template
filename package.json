@@ -30,7 +30,7 @@
     "@babel/runtime": "^7.21.5",
     "@nutui/icons-react-taro": "^0.0.1",
     "@nutui/nutui-react-taro": "^2.0.8",
-    "@preact/signals": "^1.1.5",
+    "@preact/signals": "^1.2.1",
     "@tarojs/components": "3.6.13",
     "@tarojs/helper": "3.6.13",
     "@tarojs/plugin-framework-react": "3.6.13",
@@ -46,7 +46,7 @@
     "babel-plugin-import": "^1.13.8",
     "dayjs": "^1.11.9",
     "mem": "^9.0.2",
-    "preact": "^10.5.15"
+    "preact": "^10.17.0"
   },
   "devDependencies": {
     "@babel/core": "^7.8.0",
