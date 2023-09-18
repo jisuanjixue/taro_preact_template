@@ -2,14 +2,14 @@ import './index.less'
 import { Fragment, h } from 'preact';
 import complaintSvc from "@/services/complaintSvc";
 import { useRequest } from 'ahooks';
-import { ConfigProvider, InfiniteLoading, Skeleton, Tabs, Toast } from '@nutui/nutui-react-taro';
+import { Cell, ConfigProvider, InfiniteLoading, Skeleton, Space, Tabs, Tag, Toast } from '@nutui/nutui-react-taro';
 import { batch, signal, useComputed, useSignal, useSignalEffect } from '@preact/signals';
 import { IconFont } from '@nutui/icons-react-taro'
 import './index.less'
 
 const Userinfo = () => {
   const InfiniteUlStyle = {
-    height: '400px',
+    height: "500px",
     width: '100%',
     padding: '0',
     overflowY: 'auto',
@@ -35,7 +35,7 @@ const Userinfo = () => {
     onSuccess: (res) => {
       const oldList = lists.value;
       batch(() => {
-        lists.value = page.value === 1? res.data : [...oldList, ...res.data];
+        lists.value = page.value === 1 ? res.data : [...oldList, ...res.data];
         total.value = res.total;
       })
     }
@@ -50,7 +50,7 @@ const Userinfo = () => {
   }
   const refresh = (done: () => void) => {
     setTimeout(() => {
-      run({ status: tabValue.value, page: 1, rows: 15 })
+      page.value = 1
       done()
     }, 1000)
   }
@@ -76,7 +76,7 @@ const Userinfo = () => {
         <Tabs.TabPane title="待评价" value="待评价"></Tabs.TabPane>
         <Tabs.TabPane title="已关闭" value="已关闭"></Tabs.TabPane>
       </Tabs>
-      <div id="scroll" style={InfiniteUlStyle}>
+      <div id="scroll-demo" style={InfiniteUlStyle}>
         <InfiniteLoading
           pullingText={
             <Fragment>
@@ -93,7 +93,7 @@ const Userinfo = () => {
           </ConfigProvider>}
           loadMoreText="没有啦～"
           pullRefresh
-          target="scroll"
+          target="scroll-demo"
           hasMore={hasMore.value}
           onLoadMore={loadMore}
           onRefresh={refresh}
@@ -101,9 +101,23 @@ const Userinfo = () => {
 
           {lists?.value?.map((item, index) => {
             return (
-              <li key={index} style={InfiniteLiStyle}>
-                {item.title}
-              </li>
+              <div key={index} style={InfiniteLiStyle}>
+                <Cell.Group
+                  divider={true}
+                  title=''
+                  description=''
+                >
+                  <Cell
+                    title={item.title}
+                    description={item.complaintNumber}
+                    extra={<Space direction="vertical">
+                      <div>
+                        {item.complaintTime}
+                      </div>
+                      <Tag background="#FA685D">标签</Tag>
+                    </Space>} />
+                </Cell.Group>
+              </div>
             )
           })}
         </InfiniteLoading>
