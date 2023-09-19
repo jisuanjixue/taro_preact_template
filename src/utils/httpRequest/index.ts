@@ -10,7 +10,7 @@ import authSvc from "@/services/authSvc";
 type Result<T> = {
     code: number;
     message: string;
-    result: T;
+    data: T;
 };
 
 // 导出Request类，可以用来自定义传递配置来创建实例
@@ -55,6 +55,7 @@ export class Request {
 
         this.instance.interceptors.response.use(
             (res: AxiosResponse) => {
+                console.log("🚀 ~ file: index.ts:58 ~ Request ~ constructor ~ res:", res)
                 // 直接返回res，当然你也可以只返回res.data
                 // 系统如果有自定义code也可以在这里处理
                 return res.data;
@@ -183,7 +184,7 @@ export class Request {
     public get<T = any>(
         url: string,
         config?: AxiosRequestConfig
-    ): Promise<AxiosResponse<Result<T>>> {
+    ): Promise<T> {
         return this.instance.get(url, config);
     }
 

@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "target": "es2017",
-    "module": "commonjs",
+    "module": "es2020",
     "removeComments": false,
     "preserveConstEnums": true,
     "moduleResolution": "node",
@@ -21,6 +21,11 @@
     "skipLibCheck": true,
     "allowJs": true,
     "resolveJsonModule": true,
+    "lib": [
+      "es2020",
+      "dom",
+      "DOM.Iterable"
+    ],
     "typeRoots": [
       "node_modules/@types"
     ],

@@ -14,11 +14,11 @@ interface IResponse {
   }
   
   interface IResponseData<T> extends IResponse {
-    data: T | undefined;
+    data: T;
   }
   
   interface IResponseListData<T> extends IResponse {
-    data: T[] | undefined;
+    data: T[];
   }
   export interface ISelectListItem {
     value: any;

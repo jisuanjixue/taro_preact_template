@@ -89,6 +89,8 @@ declare namespace ComplaintData {
   }
 
   interface IComplaint extends IBaseView {
+    title: string;
+    complaintNumber: string;
     complaintTime: Date;
     administrativeSubjectName: string;
     status: number;

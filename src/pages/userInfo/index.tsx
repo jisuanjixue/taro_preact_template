@@ -3,8 +3,9 @@ import { Fragment, h } from 'preact';
 import complaintSvc from "@/services/complaintSvc";
 import { useRequest } from 'ahooks';
 import { Cell, ConfigProvider, InfiniteLoading, Skeleton, Space, Tabs, Tag, Toast } from '@nutui/nutui-react-taro';
-import { batch, signal, useComputed, useSignal, useSignalEffect } from '@preact/signals';
+import { batch, useComputed, useSignal, useSignalEffect } from '@preact/signals';
 import { IconFont } from '@nutui/icons-react-taro'
+import { ComplaintData } from "../../data-types/complaint";
 import './index.less'
 
 const Userinfo = () => {
@@ -24,10 +25,9 @@ const Userinfo = () => {
   }
 
   const tabValue = useSignal<string>("研判中")
-  const lists = useSignal([])
+  const lists = useSignal<ComplaintData.IComplaint[]>([])
   const hasMore = useComputed(() => lists.value.length < total.value)
   const total = useSignal(0)
-  // const hasMore = signal(true)
   const page = useSignal<number>(1)
   const { run } = useRequest(complaintSvc.myComplaint, {
     manual: true,
