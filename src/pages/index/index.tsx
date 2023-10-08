@@ -1,17 +1,13 @@
-// import { useSignal, useComputed } from "@preact/signals";
-// import { memo } from 'preact/compat';
-// import { useLoad } from '@tarojs/taro'
+
 import './index.less'
-// import useSignalReactive from '../../hooks/useSignalReactive';
 import { Fragment, h } from 'preact';
 import { Button, Cell, Swiper, Image, Skeleton, ConfigProvider } from '@nutui/nutui-react-taro';
 import host from '../../utils/httpRequest/apiConfig'
-// import { NavBar } from 'taro-navigationbar';
 
 import bannerSvc from '@/services/bannerSvc';
 import { useRequest } from 'ahooks';
-import { Close, Left, Share } from '@nutui/icons-react-taro';
-import Taro from '@tarojs/taro';
+// import { Close, Left, Share } from '@nutui/icons-react-taro';
+// import Taro from '@tarojs/taro';
 
 const Index = () => {
   const { data, loading } = useRequest(bannerSvc.getList)
@@ -19,14 +15,10 @@ const Index = () => {
 
   return (
     <Fragment>
-       <Image src="../../assets/images/homepagenav.png" width="100%" height="100px" />
-      {/* <NavBar
-        fixed={true}
-        safeArea={true}
-        placeholder={true}
-        onBackClick={(e) => Taro.showToast({ title: '返回' })}
-      >
-      </NavBar> */}
+      <nav-bar capsule-color="white" title-color="#ffffff" title="云南省市场准入服务" bg-color="transparent" hidden-capsule="{{true}}">
+        <image class="capsule-bar-bg" src="../../assets/images/homepagenav.png"></image>
+        <view class="intro">欢迎使用代码片段，可在控制台查看代码片段的说明和文档</view>
+      </nav-bar>
       <div className={'pageIndex'}>
         {loading ? <Skeleton width="250px" height="15px" animated /> :
           <Swiper

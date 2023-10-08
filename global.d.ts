@@ -8,6 +8,7 @@ declare module "*.less";
 declare module "*.scss";
 declare module "*.sass";
 declare module "*.styl";
+declare module 'nav-bar';
 
 declare namespace JSX {
   interface IntrinsicElements {}
@@ -20,6 +21,7 @@ declare namespace NodeJS {
   interface Global {
     // eslint-disable-next-line @typescript-eslint/ban-types
     globalData: object;
+
   }
 }
 
