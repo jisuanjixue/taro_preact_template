@@ -15,9 +15,9 @@ const App = ({ children }: PropsWithChildren<any>) => {
   return (
     <ConfigProvider>
       {children}
-      </ConfigProvider>
+    </ConfigProvider>
   )
-  
+
 }
 
 export default App
