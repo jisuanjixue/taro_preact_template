@@ -1,3 +1,5 @@
+import React from 'react'
+
 declare module "*.png";
 declare module "*.gif";
 declare module "*.jpg";
@@ -8,10 +10,11 @@ declare module "*.less";
 declare module "*.scss";
 declare module "*.sass";
 declare module "*.styl";
-declare module 'nav-bar';
 
 declare namespace JSX {
-  interface IntrinsicElements {}
+  interface IntrinsicElements {
+    'capsule-bar': React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement> // replace 'any' with the actual type if available
+  }
 }
 declare namespace NodeJS {
   interface ProcessEnv {

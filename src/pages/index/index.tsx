@@ -1,8 +1,10 @@
 
 import './index.less'
 import { Fragment, h } from 'preact';
-import { Button, Cell, Swiper, Image, Skeleton, ConfigProvider } from '@nutui/nutui-react-taro';
+import { Button, Cell, Swiper, Image, Skeleton, ConfigProvider, Row, Col } from '@nutui/nutui-react-taro';
 import host from '../../utils/httpRequest/apiConfig'
+import navBarImage from '../../assets/images/homepagenav.png'
+import deviceUtil from '../../utils/device-util.js'
 
 import bannerSvc from '@/services/bannerSvc';
 import { useRequest } from 'ahooks';
@@ -15,10 +17,17 @@ const Index = () => {
 
   return (
     <Fragment>
-      <nav-bar capsule-color="white" title-color="#ffffff" title="云南省市场准入服务" bg-color="transparent" hidden-capsule="{{true}}">
-        <image class="capsule-bar-bg" src="../../assets/images/homepagenav.png"></image>
-        <view class="intro">欢迎使用代码片段，可在控制台查看代码片段的说明和文档</view>
-      </nav-bar>
+      <capsule-bar capsuleColor="white" titleColor="#ffffff" title="云南省市场准入服务" bgColor="transparent" hiddenCapsule={true}>
+        <Image className="capsule_bar_bg" src={navBarImage} height={`${deviceUtil.getNavigationBarHeight() + 300}rpx`}></Image>
+        <Row type="flex" wrap="nowrap" gutter="2" className="login" style={{top: `${deviceUtil.getNavigationBarHeight() + 60}rpx`}}>
+            <Col span="4">
+                <div className="flex-content">您好！</div>
+            </Col>
+            <Col span="20">
+                {<div className="flex-content">云南某某有限公司</div>}
+            </Col>
+        </Row>
+      </capsule-bar>
       <div className={'pageIndex'}>
         {loading ? <Skeleton width="250px" height="15px" animated /> :
           <Swiper

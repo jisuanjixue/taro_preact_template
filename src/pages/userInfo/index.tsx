@@ -7,10 +7,10 @@ import { batch, useComputed, useSignal, useSignalEffect } from '@preact/signals'
 import { IconFont } from '@nutui/icons-react-taro'
 import { ComplaintData } from "../../data-types/complaint";
 import './index.less'
+import { useEffect } from 'preact/hooks';
 
 const Userinfo = () => {
   const InfiniteUlStyle = {
-    height: "500px",
     width: '100%',
     padding: '0',
     overflowY: 'auto',
@@ -59,9 +59,9 @@ const Userinfo = () => {
     run({ status: tabValue.value, page: page.value, rows: 15 })
   })
 
+
   return (
     <div className='userInfo'>
-      <Toast id="test" />
       <Tabs
         defaultValue='研判中'
         value={tabValue.value}
@@ -76,52 +76,53 @@ const Userinfo = () => {
         <Tabs.TabPane title="待评价" value="待评价"></Tabs.TabPane>
         <Tabs.TabPane title="已关闭" value="已关闭"></Tabs.TabPane>
       </Tabs>
-      <div id="scroll-demo" style={InfiniteUlStyle}>
-        <InfiniteLoading
-          pullingText={
-            <Fragment>
-              <IconFont name="Refresh" color="#888" />
-              <span style={{ fontSize: '10px' }}>松开刷新</span>
-            </Fragment>
-          }
-          loadingText={<ConfigProvider
-            theme={{
-              nutuiSkeletonLineBorderRadius: '10px',
-            }}
+        <div style={{ ...InfiniteUlStyle, height: '500px' }} id="list">
+          <InfiniteLoading
+            pullingText={
+              <Fragment>
+                <IconFont name="Refresh" color="#888" />
+                <span style={{ fontSize: '10px' }}>松开刷新</span>
+              </Fragment>
+            }
+            loadingText={<ConfigProvider
+              theme={{
+                nutuiSkeletonLineBorderRadius: '10px',
+              }}
+            >
+              <Skeleton rows={3} animated />
+            </ConfigProvider>}
+            loadMoreText="没有啦～"
+            pullRefresh
+            target="list"
+            hasMore={hasMore.value}
+            onLoadMore={loadMore}
+            onRefresh={refresh}
+            onScroll={(params) => console.log(params)}
           >
-            <Skeleton rows={3} animated />
-          </ConfigProvider>}
-          loadMoreText="没有啦～"
-          pullRefresh
-          target="scroll-demo"
-          hasMore={hasMore.value}
-          onLoadMore={loadMore}
-          onRefresh={refresh}
-        >
 
-          {lists?.value?.map((item, index) => {
-            return (
-              <div key={index} style={InfiniteLiStyle}>
-                <Cell.Group
-                  divider={true}
-                  title=''
-                  description=''
-                >
-                  <Cell
-                    title={item.title}
-                    description={item.complaintNumber}
-                    extra={<Space direction="vertical">
-                      <div>
-                        {item.complaintTime}
-                      </div>
-                      <Tag background="#FA685D">标签</Tag>
-                    </Space>} />
-                </Cell.Group>
-              </div>
-            )
-          })}
-        </InfiniteLoading>
-      </div>
+            {(lists?.value || [])?.map((item, index) => {
+              return (
+                <div key={index} style={{ ...InfiniteLiStyle, height: '500px' }}>
+                  <Cell.Group
+                    divider={true}
+                    title=''
+                    description=''
+                  >
+                    <Cell
+                      title={item.title}
+                      description={item.complaintNumber}
+                      extra={<Space direction="vertical">
+                        <div>
+                          {item.complaintTime}
+                        </div>
+                        <Tag background="#FA685D">标签</Tag>
+                      </Space>} />
+                  </Cell.Group>
+                </div>
+              )
+            })}
+          </InfiniteLoading>
+        </div>
     </div>
   )
 }

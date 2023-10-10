@@ -1,6 +1,7 @@
 import deviceUtil from '../../utils/device-util';
 import validator from '../../behaviors/validator';
 import eventUtil from '../../core/utils/event-util';
+require('./index.less')
 
 Component({
     options: {
