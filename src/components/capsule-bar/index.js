@@ -1,6 +1,8 @@
 import deviceUtil from '../../utils/device-util';
 import validator from '../../behaviors/validator';
 import eventUtil from '../../core/utils/event-util';
+import capsuleLeftWhite from './icons/capsule-left-white.png'
+import capsuleRightWhite from './icons/capsule-right-white.png'
 require('./index.less')
 
 Component({
@@ -109,7 +111,9 @@ Component({
         // 状态栏高度（单位px）
         statusBarHeight: deviceUtil.getStatusBarHeight(),
         // 左侧胶囊按钮信息
-        capsuleButtonInfo: null
+        capsuleButtonInfo: null,
+        capsuleLeftWhite: capsuleLeftWhite,
+        capsuleRightWhite: capsuleRightWhite
     },
 
     lifetimes: {

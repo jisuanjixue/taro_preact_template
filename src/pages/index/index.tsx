@@ -13,7 +13,6 @@ import { useRequest } from 'ahooks';
 
 const Index = () => {
   const { data, loading } = useRequest(bannerSvc.getList)
-  console.log("🚀 ~ file: index.tsx:14 ~ Index ~ data:", data)
 
   return (
     <Fragment>

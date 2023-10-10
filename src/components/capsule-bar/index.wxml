@@ -30,7 +30,7 @@
         <cover-image
           class="icon-left"
           style="width:{{capsuleLeftIconWidth?capsuleLeftIconWidth+'rpx':''}};height:{{capsuleLeftIconHeight?capsuleLeftIconHeight+'rpx':''}};"
-          src="{{capsuleLeftIconPath?capsuleLeftIconPath:'icons/capsule-left-'+capsuleColor+'.png'}}"
+          src="{{capsuleLeftIconPath?capsuleLeftIconPath: capsuleLeftWhite}}"
         ></cover-image>
       </cover-view>
 
@@ -48,7 +48,7 @@
         <cover-image
           class="icon-right"
           style="width:{{capsuleRightIconWidth?capsuleRightIconWidth+'rpx':''}};height:{{capsuleRightIconHeight?capsuleRightIconHeight+'rpx':''}}"
-          src="{{capsuleRightIconPath?capsuleRightIconPath:'icons/capsule-right-'+capsuleColor+'.png'}}"
+          src="{{capsuleRightIconPath?capsuleRightIconPath: capsuleRightWhite}}"
         ></cover-image>
       </cover-view>
     </cover-view>
