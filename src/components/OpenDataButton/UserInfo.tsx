@@ -1,5 +1,5 @@
 import Taro from "@tarojs/taro";
-import { Button } from "@tarojs/components";
+import { Button } from "@nutui/nutui-react-taro";
 import useOpenData from "./useOpenData";
 import { h } from "preact";
 
@@ -25,7 +25,7 @@ export default (props: IProps) => {
   };
 
   return (
-    <Button size="default" type="primary" loading={openData.loading} onClick={getUserInfo}>
+    <Button type="primary" loading={openData.loading} onClick={getUserInfo}>
       获取
     </Button>
   );

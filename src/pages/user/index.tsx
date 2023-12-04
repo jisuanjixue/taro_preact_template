@@ -1,14 +1,8 @@
-import { View } from '@tarojs/components'
 import { useSignal, useComputed } from "@preact/signals";
-// import { useLoad } from '@tarojs/taro'
 import './index.less'
 import { h } from 'preact';
-// import { useEffect } from 'preact/hooks';
 import { Button, Cell } from '@nutui/nutui-react-taro';
 import Taro from '@tarojs/taro';
-// import { useRequest } from 'ahooks'
-
-// import caseSvc from '@/services/caseSvc';
 
 
 const Index = () => {
@@ -17,7 +11,7 @@ const Index = () => {
   const double = useComputed(() => count.value * 2);
 
   return (
-    <View>
+    <div>
       <h1>
         count:{count}, double:{double}
       </h1>
@@ -27,11 +21,11 @@ const Index = () => {
         increment
       </Button>
       <Button shape="square" type="primary" size="large"
-        onClick={() => Taro.navigateTo({url: '/pages/userInfo/index'})}
+        onClick={() => Taro.navigateTo({ url: '/pages/userInfo/index' })}
       >
         我的投诉
       </Button>
-    </View>
+    </div>
   )
 }
 

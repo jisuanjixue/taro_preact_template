@@ -1,4 +1,3 @@
-import { ButtonProps, CommonEventFunction } from "@tarojs/components";
 import {useEffect } from "preact/compat"
 import { Button } from "@nutui/nutui-react-taro";
 import useOpenData from "./useOpenData";
@@ -16,7 +15,7 @@ interface IProps {
 
 export default (props: IProps) => {
   const openData = useOpenData<IDecrpytData>();
-  const onGetPhoneNumber: CommonEventFunction<ButtonProps.onGetPhoneNumberEventDetail> = ({ detail }) => {
+  const onGetPhoneNumber = ({ detail }) => {
     if (detail.errMsg.indexOf(":ok") === -1) {
       Taro.showToast({ title: "拒绝申请，无法获取电话号码", icon: "none" });
       return;
