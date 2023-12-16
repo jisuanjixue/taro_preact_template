@@ -15,7 +15,7 @@
       "disablePlugins": [],
       "outputPath": ""
     },
-    "condition": false
+    "condition": true
   },
   "compileType": "miniprogram",
   "libVersion": "3.0.0",

@@ -7,7 +7,6 @@ import { batch, useComputed, useSignal, useSignalEffect } from '@preact/signals'
 import { IconFont } from '@nutui/icons-react-taro'
 import { ComplaintData } from "../../data-types/complaint";
 import './index.less'
-import { useEffect } from 'preact/hooks';
 
 const Userinfo = () => {
   const InfiniteUlStyle = {
@@ -76,53 +75,53 @@ const Userinfo = () => {
         <Tabs.TabPane title="待评价" value="待评价"></Tabs.TabPane>
         <Tabs.TabPane title="已关闭" value="已关闭"></Tabs.TabPane>
       </Tabs>
-        <div style={{ ...InfiniteUlStyle, height: '500px' }} id="list">
-          <InfiniteLoading
-            pullingText={
-              <Fragment>
-                <IconFont name="Refresh" color="#888" />
-                <span style={{ fontSize: '10px' }}>松开刷新</span>
-              </Fragment>
-            }
-            loadingText={<ConfigProvider
-              theme={{
-                nutuiSkeletonLineBorderRadius: '10px',
-              }}
-            >
-              <Skeleton rows={3} animated />
-            </ConfigProvider>}
-            loadMoreText="没有啦～"
-            pullRefresh
-            target="list"
-            hasMore={hasMore.value}
-            onLoadMore={loadMore}
-            onRefresh={refresh}
-            onScroll={(params) => console.log(params)}
+      <div style={{ ...InfiniteUlStyle, height: '500px' }} id="list">
+        <InfiniteLoading
+          pullingText={
+            <Fragment>
+              <IconFont name="Refresh" color="#888" />
+              <span style={{ fontSize: '10px' }}>松开刷新</span>
+            </Fragment>
+          }
+          loadingText={<ConfigProvider
+            theme={{
+              nutuiSkeletonLineBorderRadius: '10px',
+            }}
           >
+            <Skeleton rows={3} animated />
+          </ConfigProvider>}
+          loadMoreText="没有啦～"
+          pullRefresh
+          target="list"
+          hasMore={hasMore.value}
+          onLoadMore={loadMore}
+          onRefresh={refresh}
+          onScroll={(params) => console.log(params)}
+        >
 
-            {(lists?.value || [])?.map((item, index) => {
-              return (
-                <div key={index} style={{ ...InfiniteLiStyle, height: '500px' }}>
-                  <Cell.Group
-                    divider={true}
-                    title=''
-                    description=''
-                  >
-                    <Cell
-                      title={item.title}
-                      description={item.complaintNumber}
-                      extra={<Space direction="vertical">
-                        <div>
-                          {item.complaintTime}
-                        </div>
-                        <Tag background="#FA685D">标签</Tag>
-                      </Space>} />
-                  </Cell.Group>
-                </div>
-              )
-            })}
-          </InfiniteLoading>
-        </div>
+          {(lists?.value || [])?.map((item, index) => {
+            return (
+              <div key={index} style={{ ...InfiniteLiStyle, height: '500px' }}>
+                <Cell.Group
+                  divider={true}
+                  title=''
+                  description=''
+                >
+                  <Cell
+                    title={item.title}
+                    description={item.complaintNumber}
+                    extra={<Space direction="vertical">
+                      <div>
+                        {item.complaintTime}
+                      </div>
+                      <Tag background="#FA685D">标签</Tag>
+                    </Space>} />
+                </Cell.Group>
+              </div>
+            )
+          })}
+        </InfiniteLoading>
+      </div>
     </div>
   )
 }
